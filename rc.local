@@ -1,0 +1,19 @@
+#!/bin/sh -e
+#
+#rc.local
+#
+#Este script se ejecuta al final de cada nivel de ejecución multiusuario.
+#Mantenga el script con "exit 0" en caso de éxito o cualquier otro valor en caso de error.
+#
+#Para habilitar o deshabilitar este script basta con cambiar los bits de ejecución.
+#
+#Por defecto este script no hace nada.
+#
+#Imprimir la dirección IP
+_IP=$(hostname -I) || true
+if ( "$_IP" ); then
+  printf "Mi direccion de IP es %s\n" "$_IP"
+fi
+sudo python3 /home/pi/shutdown.py &
+sh /home/pi/camera.sh &
+exit 0
